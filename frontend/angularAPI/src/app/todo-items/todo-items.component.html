@@ -1,0 +1,77 @@
+
+<H1>LISTA DE TAREAS</H1>
+<div>
+    <ul>
+        <li *ngFor="let item of todoItems">
+            ID TAREA {{item.id}}<br>
+            Nombre: {{item.name}} <br>
+            Completa: {{item.isComplete}} 
+     
+            </li>
+            
+
+    </ul>
+
+</div>
+
+
+
+<H1>NUEVA TAREA</H1>
+
+    <div class="md-form">
+        <label >Nombre  </label>
+        <input #box (keyup)="0" type="text" name="text"  id="form1" class="form-control"><br><br>
+
+        <label >ID  </label>
+        <input #box1 (keyup)="0" type="text" name="text"  id="form1" class="form-control"> <br><br>
+        <button (click)="guardarTarea(box.value, box1.value)">Click me!</button>
+    </div>
+
+
+<H1>ACTUALIZAR TAREA</H1>
+
+<div *ngFor="let item of todoItems">
+    <br>
+    <label >Tarea: {{item.id}}</label><br><br>
+    <label >Nombre de la Tarea  </label>
+    <input #box0 (keyup)="0" type="text" name="text" [(ngModel)]="item.name" id="form1" class="form-control"><br>
+    
+    <label >¿Está completa la Tarea?   </label><br>
+
+    <div *ngIf="item.isComplete">
+        <input type="radio"  name="isComplete_Radio" (change)=marcarTrue(item) checked>
+        <label for="si" >SI</label>
+        <input type="radio"  name="isComplete_Radio" (change)=marcarFalse(item)>
+        <label for="no">NO</label><br><br>
+    </div>
+
+    <div *ngIf="!item.isComplete">
+        <input type="radio"  name="isComplete_Radio" (change)=marcarTrue(item)>
+        <label for="si" >SI</label>
+        <input type="radio"  name="isComplete_Radio" (change)=marcarFalse(item) checked>
+        <label for="no">NO</label><br><br>
+    </div>
+
+
+
+    <!--<input #box2 (keyup)="0" type="text" name="text2" [(ngModel)]="item.isComplete" id="form3" class="form-control"><br><br>-->
+
+    <button (click)="actualizarTarea(item)">Actualizar Tarea</button>
+
+
+</div>
+
+
+<H1>BORRAR TAREA</H1>
+
+<div>
+    <select (change)="selectChangeHandler($event)">       
+        <option  selected>---NONE---</option>
+       <option  *ngFor="let item of todoItems" value="{{item.id}}">{{item.name}}</option>
+       <!-- <option  *ngFor="let item of todoItems" value="{{item}}">{{item.name}}</option>-->
+
+        <!--(ngModelChange)="onChangeObj($event)"-->
+    </select>
+
+
+</div>
